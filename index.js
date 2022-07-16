@@ -7,17 +7,17 @@ import { registerValidation, loginValidation } from './auth/authValidation.js';
 import  handleValidationErrors  from './auth/handleValidationErrors.js';
 import  checkAuth  from './auth/checkAuth.js';
 
+// mongodb+srv://admin:2310714@cluster0.sg3mhrd.mongodb.net/?retryWrites=true&w=majority
+
 const app = express();
-const PORT = 4444;
+// const PORT = 4444;
 
 app.use(bodyParser.json());
 
-app.listen(PORT, () => console.log("Server is alive"));
+app.listen(process.env.PORT || 4444, () => console.log("Server is alive"));
 
 mongoose
-  .connect(
-    "mongodb+srv://admin:2310714@cluster0.sg3mhrd.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("DB Alive"))
   .catch((err) => console.log("DB Failed", err));
 

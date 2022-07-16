@@ -21,9 +21,12 @@ const FavoriteSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    favorite: {
-        type: Boolean,
+        goalSets: {
+        type: Number,
     },
+        goalSets: {
+            type: Number,
+        },
     user: {
         type: String,
         // required: true,
