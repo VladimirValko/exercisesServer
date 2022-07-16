@@ -1,6 +1,21 @@
 import ExerciseModel from "../models/exercise.js";
 import FavoriteModel from '../models/favorite.js'
 
+
+export const getOne = async (req, res) => {
+  try {
+    const exercise = await ExerciseModel.findOne(
+        { _id: req.params.id });
+    res.json(exercise)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Не удалось получить упражнения..",
+    });
+  }
+};
+
+
 export const getAll = async (req, res) => {
   try {
     const exercises = await ExerciseModel.find(); //

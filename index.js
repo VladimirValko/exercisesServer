@@ -25,6 +25,7 @@ mongoose
 
 // app.post("/exercises", ExeciseControllers.pushData);
 app.get("/exercises", ExeciseControllers.getAll);
+app.get("/exercises/exercise/:id", ExeciseControllers.getOne);
 app.get("/exercises/:search", ExeciseControllers.searchExercise);
 app.post("/favorite", checkAuth, ExeciseControllers.addToFavorite);
 
