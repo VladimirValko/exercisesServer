@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import * as ExeciseControllers from './controllers/exerciseControllers.js';
 import * as UserControllers from './controllers/userControllers.js';
 import { registerValidation, loginValidation } from './auth/authValidation.js';
@@ -13,7 +14,7 @@ const app = express();
 // const PORT = 4444;
 
 app.use(bodyParser.json());
-
+app.use(cors());
 
 mongoose
   .connect('mongodb+srv://admin:2310714@cluster0.sg3mhrd.mongodb.net/?retryWrites=true&w=majority')

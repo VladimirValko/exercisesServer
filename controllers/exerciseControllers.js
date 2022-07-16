@@ -33,18 +33,12 @@ export const getByMuscle = async (req, res) => {
   }
 };
 
-// работает медленно, может реализовать на фронте?
+
 export const searchExercise = async (req, res) => {
   try {
     const search = req.params.search;
-
-    const exercises = await ExerciseModel.find().then(res => res.filter(
-        (exercise) =>
-          exercise.name.toLowerCase().includes(search) ||
-          exercise.target.toLowerCase().includes(search) ||
-          exercise.equipment.toLowerCase().includes(search) ||
-          exercise.bodyPart.toLowerCase().includes(search))); //
-
+    console.log(req.params);
+    const exercises = await ExerciseModel.find();
         res.json(exercises); 
   } catch (error) {
     console.log(error);

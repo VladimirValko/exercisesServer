@@ -24,7 +24,7 @@ const FavoriteSchema = new mongoose.Schema({
         goalSets: {
         type: Number,
     },
-        goalSets: {
+        goalReps: {
             type: Number,
         },
     user: {
