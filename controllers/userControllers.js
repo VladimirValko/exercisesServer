@@ -41,7 +41,7 @@ export const registrate = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email });
-
+    console.log(req.body)
     if (!user) {
       return res.status(400).json({
         message: "Пользователь не найден",

@@ -25,9 +25,11 @@ mongoose
 
 // app.post("/exercises", ExeciseControllers.pushData);
 app.get("/exercises", ExeciseControllers.getAll);
+app.get("/favorite", checkAuth, ExeciseControllers.getFavorite);
 app.get("/exercises/exercise/:id", ExeciseControllers.getOne);
+app.get("/exercises/favorite/:id", ExeciseControllers.getFavoriteOne);
 app.get("/exercises/:search", ExeciseControllers.searchExercise);
-app.post("/favorite", checkAuth, ExeciseControllers.addToFavorite);
+app.post("/exercises/exercise/:id", checkAuth, ExeciseControllers.addToFavorite);
 
 
 app.post("/auth/register", registerValidation, handleValidationErrors, UserControllers.registrate);

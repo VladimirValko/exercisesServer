@@ -6,6 +6,7 @@ export const getOne = async (req, res) => {
   try {
     const exercise = await ExerciseModel.findOne(
         { _id: req.params.id });
+    console.log(req.params, 'упражнение')
     res.json(exercise)
   } catch (error) {
     console.log(error);
@@ -15,11 +16,36 @@ export const getOne = async (req, res) => {
   }
 };
 
+export const getFavoriteOne = async (req, res) => {
+  try {
+    const exercise = await FavoriteModel.findOne(
+        { _id: req.params.id });
+    console.log(req.params, 'упражнение')
+    res.json(exercise)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Не удалось получить упражнения..",
+    });
+  }
+};
 
 export const getAll = async (req, res) => {
   try {
     const exercises = await ExerciseModel.find(); //
     res.json(exercises); 
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Не удалось получить упражнения..",
+    });
+  }
+};
+
+export const getFavorite = async (req, res) => {
+  try {
+    const exercises = await FavoriteModel.find(); //
+    res.json(exercises);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -70,8 +96,6 @@ export const searchExercise = async (req, res) => {
 export const addToFavorite = async (req, res) => {
   try {
 
-    console.log(req, 'это реквест из addtofav')
-
     const doc = new FavoriteModel({
       bodyPart: req.body.bodyPart,
       equipment: req.body.equipment,
@@ -82,6 +106,7 @@ export const addToFavorite = async (req, res) => {
     });
 
     const favoriteExercise = await doc.save();
+     console.log(favoriteExercise)
     res.json(favoriteExercise);
   } catch (error) {
     console.log(error);
