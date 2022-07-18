@@ -30,7 +30,11 @@ const FavoriteSchema = new mongoose.Schema({
     user: {
         type: String,
         // required: true,
-    }
+    },
+        description: {
+            type: String,
+            // required: true,
+        }
 
 },
 {

@@ -58,25 +58,25 @@ export const getFavorite = async (req, res) => {
   }
 };
 
-export const getByMuscle = async (req, res) => {
-  try {
-    const muscle = await req.params.muscle;
+// export const getByMuscle = async (req, res) => {
+//   try {
+//     const muscle = await req.params.muscle;
 
-    ExerciseModel.find({ target: muscle }, function (err, docs) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(docs);
-        res.json(docs);
-      }
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: "Не удалось получить упражнения..",
-    });
-  }
-};
+//     ExerciseModel.find({ target: muscle }, function (err, docs) {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         console.log(docs);
+//         res.json(docs);
+//       }
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({
+//       message: "Не удалось получить упражнения..",
+//     });
+//   }
+// };
 
 
 export const searchExercise = async (req, res) => {
@@ -107,10 +107,12 @@ export const addToFavorite = async (req, res) => {
       gifUrl: req.body.gifUrl,
       target: req.body.target,
       user: req.userId,
+      goalReps: req.body.goalReps,
+      goalSets: req.body.goalSets
     });
 
     const favoriteExercise = await doc.save();
-     console.log(favoriteExercise)
+     console.log(favoriteExercise, 'это фаворит')
     res.json(favoriteExercise);
   } catch (error) {
     console.log(error);
