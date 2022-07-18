@@ -23,10 +23,11 @@ mongoose
 
 
 
-// app.post("/exercises", ExeciseControllers.pushData);
+app.get("/", ExeciseControllers.getTop);
 app.get("/exercises", ExeciseControllers.getAll);
 app.get("/favorite", checkAuth, ExeciseControllers.getFavorite);
 app.get("/exercises/exercise/:id", ExeciseControllers.getOne);
+app.get("/exercises/top/:id", ExeciseControllers.getOneOfTop);
 app.get("/exercises/favorite/:id", ExeciseControllers.getFavoriteOne);
 app.get("/exercises/:search", ExeciseControllers.searchExercise);
 app.post("/exercises/exercise/:id", checkAuth, ExeciseControllers.addToFavorite);
@@ -37,5 +38,6 @@ app.post("/auth/login", loginValidation, handleValidationErrors, UserControllers
 app.get("/auth/me", checkAuth, UserControllers.checkMe);
 
 
+// app.post("/data", ExeciseControllers.pushData);
 
 app.listen(process.env.PORT || 4444, () => console.log("Server is alive"));
