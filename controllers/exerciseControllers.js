@@ -132,8 +132,7 @@ export const addToFavorite = async (req, res) => {
       gifUrl: req.body.gifUrl,
       target: req.body.target,
       user: req.userId,
-      goalReps: req.body.goalReps,
-      goalSets: req.body.goalSets
+
     });
 
     const favoriteExercise = await doc.save();
