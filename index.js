@@ -34,6 +34,7 @@ app.get("/exercises/:search", ExeciseControllers.searchExercise);
 app.post("/exercises/exercise/:id", checkAuth, ExeciseControllers.addToFavorite);
 app.post("/workouts", WorkoutControllers.createWorkout);
 app.patch("/workouts", WorkoutControllers.updateWorkout);
+app.get("/workouts", checkAuth, WorkoutControllers.getWorkoutPlan);
 
 
 app.post("/auth/register", registerValidation, handleValidationErrors, UserControllers.registrate);

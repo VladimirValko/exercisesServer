@@ -1,9 +1,9 @@
-import WorkoutSchema from '../models/workoutPlan.js' 
+import WorkoutModel from '../models/workoutPlan.js' 
 
 
 export const createWorkout = async (req, res) => {
     try {
-        console.log(req.body, 'это реквест')
+        console.log(req.body, 'это реквест креэйт')
 
         const oneExrecise = {
             exerciseName: req.body.exerciseName,
@@ -14,7 +14,7 @@ export const createWorkout = async (req, res) => {
             weight: req.body.weight,
             
         };
-        const workout = new WorkoutSchema({
+        const workout = new WorkoutModel({
                 completedWorkout: oneExrecise,
                 user: req.body.user 
         });
@@ -22,7 +22,7 @@ export const createWorkout = async (req, res) => {
         // console.log(doc, 'это док');
 
         const completedWorkout = await workout.save();
-         console.log(completedWorkout, 'это workout')
+         console.log(completedWorkout, 'это workout креэйт')
         res.json(completedWorkout);
       } catch (error) {
         console.log(error);
@@ -35,7 +35,7 @@ export const createWorkout = async (req, res) => {
 
 export const updateWorkout = async (req, res) => {
     try {
-        console.log(req.body, 'это реквест')
+        console.log(req.body, 'это реквест апдэйт')
 
         const oneExrecise = {
             exerciseName: req.body.exerciseName,
@@ -45,17 +45,17 @@ export const updateWorkout = async (req, res) => {
             actualReps: req.body.actualReps,
             weight: req.body.weight,
         };
-        const workout = new WorkoutSchema({
+        const workout = new WorkoutModel({
                 completedWorkout: oneExrecise 
         });
     
         // console.log(doc, 'это док');
 
-        const completedWorkout = await WorkoutSchema.findOneAndUpdate(
+        const completedWorkout = await WorkoutModel.findOneAndUpdate(
             {user: req.body.user},
             {$push: {completedWorkout: oneExrecise}}
         );
-         console.log(completedWorkout, 'это новый массив')
+         console.log(completedWorkout, 'это новый массив апдэйт')
         res.json(completedWorkout);
       } catch (error) {
         console.log(error);
@@ -64,3 +64,20 @@ export const updateWorkout = async (req, res) => {
         });
       }
 };
+
+export const getWorkoutPlan = async (req, res) => {
+    try {
+        const id = await req.userId;
+        console.log(id, "это userID реквест гет")
+      const workoutPlan = await WorkoutModel.find({
+        user: id
+      }); 
+      console.log(workoutPlan, "это то что нашлось")
+      res.json(workoutPlan); 
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: "Не удалось получить упражнения..",
+      });
+    }
+  };

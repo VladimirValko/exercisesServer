@@ -74,7 +74,7 @@ export const getFavorite = async (req, res) => {
     console.log(user_ID);
 
     const exercises = await FavoriteModel.find({user: user_ID}); //
-    console.log(req.params, 'это парамсы')
+    console.log(user_ID, 'это user_ID из фаворитс')
     res.json(exercises);
   } catch (error) {
     console.log(error);
