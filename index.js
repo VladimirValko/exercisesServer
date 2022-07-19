@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import * as ExeciseControllers from './controllers/exerciseControllers.js';
 import * as UserControllers from './controllers/userControllers.js';
+import * as WorkoutControllers from './controllers/workoutsControllers.js';
 import { registerValidation, loginValidation } from './auth/authValidation.js';
 import  handleValidationErrors  from './auth/handleValidationErrors.js';
 import  checkAuth  from './auth/checkAuth.js';
@@ -31,6 +32,8 @@ app.get("/exercises/top/:id", ExeciseControllers.getOneOfTop);
 app.get("/exercises/favorite/:id", ExeciseControllers.getFavoriteOne);
 app.get("/exercises/:search", ExeciseControllers.searchExercise);
 app.post("/exercises/exercise/:id", checkAuth, ExeciseControllers.addToFavorite);
+app.post("/workouts", WorkoutControllers.createWorkout);
+app.patch("/workouts", WorkoutControllers.updateWorkout);
 
 
 app.post("/auth/register", registerValidation, handleValidationErrors, UserControllers.registrate);
