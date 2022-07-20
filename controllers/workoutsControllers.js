@@ -15,15 +15,15 @@ export const createWorkout = async (req, res) => {
             
         };
         const workout = new WorkoutModel({
-                completedWorkout: oneExrecise,
+                myWorkout: oneExrecise,
                 user: req.body.user 
         });
     
         // console.log(doc, 'это док');
 
-        const completedWorkout = await workout.save();
-         console.log(completedWorkout, 'это workout креэйт')
-        res.json(completedWorkout);
+        const myWorkout = await workout.save();
+         console.log(myWorkout, 'это workout креэйт')
+        res.json(myWorkout);
       } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -49,18 +49,18 @@ export const updateWorkout = async (req, res) => {
 
         console.log(oneExrecise, 'пришло с фронта')
         const workout = new WorkoutModel({
-                completedWorkout: oneExrecise 
+                myWorkout: oneExrecise 
         });
     
         // console.log(doc, 'это док');
 
         if(oneExrecise.exerciseName.length > 2){
-            const completedWorkout = await WorkoutModel.findOneAndUpdate(
+            const userWorkout = await WorkoutModel.findOneAndUpdate(
                 {user: req.body.user},
-                {$push: {completedWorkout: oneExrecise}}
+                {$push: {myWorkout: oneExrecise}}
             );
-             console.log(completedWorkout, 'это новый массив апдэйт')
-            res.json(completedWorkout);
+             console.log(userWorkout, 'это новый массив апдэйт')
+            res.json(userWorkout);
         } else {
             res.status(500).json({
                 message: "Не удалось добавить тренировку",
