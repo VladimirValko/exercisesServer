@@ -32,7 +32,6 @@ export const getFavoriteOne = async (req, res) => {
   try {
     const exercise = await FavoriteModel.findOne(
         { _id: req.params.id });
-    console.log(req.params, 'упражнение')
     res.json(exercise)
   } catch (error) {
     console.log(error);
@@ -58,7 +57,6 @@ export const getAll = async (req, res) => {
 export const getTop = async (req, res) => {
   try {
     const exercises = await TopModel.find(); //
-    console.log(exercises, 'это exercises')
     res.json(exercises);
   } catch (error) {
     console.log(error);
@@ -136,7 +134,6 @@ export const addToFavorite = async (req, res) => {
     });
 
     const favoriteExercise = await doc.save();
-     console.log(favoriteExercise, 'это фаворит')
     res.json(favoriteExercise);
   } catch (error) {
     console.log(error);

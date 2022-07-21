@@ -34,7 +34,7 @@ export const registrate = async (req, res) => {
 
     res.json({ ...userData, token });
   } catch (error) {
-    res.json(error);
+    res.json(error, 'Registration failure');
   }
 };
 

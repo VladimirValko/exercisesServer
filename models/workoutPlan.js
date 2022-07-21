@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const WorkoutSchema = new mongoose.Schema({
    myWorkout: [],
-   user: String
+   user: String,
+   workoutName: String
 },
 {
     timestamps: true,
