@@ -41,7 +41,7 @@ app.post("/workouts", WorkoutControllers.createWorkout);
 app.patch("/workouts", WorkoutControllers.updateWorkout);
 app.get("/workouts", checkAuth, WorkoutControllers.getWorkoutPlan);
 app.post("/progress", checkAuth, CompletedControllers.createCompletedWorkout);
-app.patch("/progress", checkAuth, CompletedControllers.updateCompletedWorkout);
+app.get("/progress", checkAuth, CompletedControllers.getCompletedWorkouts);
 
 
 

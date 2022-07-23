@@ -21,32 +21,19 @@ export const createCompletedWorkout = async (req, res) => {
   }
 };
 
-export const updateCompletedWorkout = async (req, res) => {
+
+export const getCompletedWorkouts = async (req, res) => {
     try {
-  
-  
-      const oneExrecise = {
-        currentexerciseName: req.body.currentexerciseName,
-        goalSets: req.body.goalSets,
-        actualSets: req.body.actualSets,
-        goalReps: req.body.goalReps,
-        actualReps: req.body.actualReps,
-        goalWeight: req.body.goalWeight,
-        actualWeight: req.body.actualWeight,
-      };
-  
-      const completedWorkout = await CompletedModel.findOneAndUpdate(
-        { 
-          user: req.body.user 
-        },
-        { $push: { exercises: oneExrecise } },
-      );
-      console.log(completedWorkout, "это completedWorkout апдэйт");
-      res.json(completedWorkout);
+        const completedWorkouts = await CompletedModel.find({
+            user: req.userId,
+        });
+        console.log(req, 'ЭТО РЕК')
+      console.log(completedWorkouts, "это то что нашлось completedWorkouts");
+      res.json(completedWorkouts);
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        message: "Не удалось добавить тренировку",
+        message: "Не удалось получить упражнения..",
       });
     }
   };
