@@ -1,12 +1,11 @@
 import ExerciseModel from "../models/exercise.js";
-import FavoriteModel from '../models/favorite.js'
-import TopModel from '../models/top.js'
+import FavoriteModel from "../models/favorite.js";
+import TopModel from "../models/top.js";
 
 export const getOne = async (req, res) => {
   try {
-    const exercise = await ExerciseModel.findOne(
-        { _id: req.params.id });
-    res.json(exercise)
+    const exercise = await ExerciseModel.findOne({ _id: req.params.id });
+    res.json(exercise);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -17,9 +16,8 @@ export const getOne = async (req, res) => {
 
 export const getOneOfTop = async (req, res) => {
   try {
-    const exercise = await TopModel.findOne(
-        { _id: req.params.id });
-    res.json(exercise)
+    const exercise = await TopModel.findOne({ _id: req.params.id });
+    res.json(exercise);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -30,9 +28,8 @@ export const getOneOfTop = async (req, res) => {
 
 export const getFavoriteOne = async (req, res) => {
   try {
-    const exercise = await FavoriteModel.findOne(
-        { _id: req.params.id });
-    res.json(exercise)
+    const exercise = await FavoriteModel.findOne({ _id: req.params.id });
+    res.json(exercise);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -44,7 +41,7 @@ export const getFavoriteOne = async (req, res) => {
 export const getAll = async (req, res) => {
   try {
     const exercises = await ExerciseModel.find(); //
-    res.json(exercises); 
+    res.json(exercises);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -52,7 +49,6 @@ export const getAll = async (req, res) => {
     });
   }
 };
-
 
 export const getTop = async (req, res) => {
   try {
@@ -71,8 +67,8 @@ export const getFavorite = async (req, res) => {
     const user_ID = await req.userId;
     console.log(user_ID);
 
-    const exercises = await FavoriteModel.find({user: user_ID}); //
-    console.log(user_ID, 'это user_ID из фаворитс')
+    const exercises = await FavoriteModel.find({ user: user_ID }); //
+    console.log(user_ID, "это user_ID из фаворитс");
     res.json(exercises);
   } catch (error) {
     console.log(error);
@@ -102,12 +98,11 @@ export const getFavorite = async (req, res) => {
 //   }
 // };
 
-
 export const searchExercise = async (req, res) => {
   try {
     const search = req.params.search;
     const exercises = await ExerciseModel.find();
-        res.json(exercises); 
+    res.json(exercises);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -116,13 +111,8 @@ export const searchExercise = async (req, res) => {
   }
 };
 
-
-
-
-
 export const addToFavorite = async (req, res) => {
   try {
-
     const doc = new FavoriteModel({
       bodyPart: req.body.bodyPart,
       equipment: req.body.equipment,
@@ -130,7 +120,6 @@ export const addToFavorite = async (req, res) => {
       gifUrl: req.body.gifUrl,
       target: req.body.target,
       user: req.userId,
-
     });
 
     const favoriteExercise = await doc.save();
@@ -143,8 +132,42 @@ export const addToFavorite = async (req, res) => {
   }
 };
 
+export const deleteFavorite = async (req, res) => {
+  try {
+    const exerciseId = await req.params.id;
+    console.log(req);
+    const favoriteExercise = FavoriteModel.findOneAndDelete(
+      {
+        user: req.userId,
+        _id: exerciseId,
+      },
+      (error, doc) => {
+        console.log(doc);
 
+        if (error) {
+          console.log(error);
+          return res.status(500).json({
+            message: "Не удалось удалить exercise",
+          });
+        }
+        if (!doc) {
+          return res.status(404).json({
+            message: "Не удалось найти exercise",
+          });
+        }
 
+        res.json({
+          successe: true,
+        });
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Не удалось удалить упражнение..",
+    });
+  }
+};
 // const db = [
 //   {
 //     "bodyPart": "chest",

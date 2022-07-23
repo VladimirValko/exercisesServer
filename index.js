@@ -34,6 +34,7 @@ app.get("/exercises/top/:id", ExeciseControllers.getOneOfTop);
 app.get("/exercises/favorite/:id", ExeciseControllers.getFavoriteOne);
 app.get("/exercises/:search", ExeciseControllers.searchExercise);
 app.post("/exercises/exercise/:id", checkAuth, ExeciseControllers.addToFavorite);
+app.delete("/exercises/exercise/:id", checkAuth, ExeciseControllers.deleteFavorite);
 
 
 
