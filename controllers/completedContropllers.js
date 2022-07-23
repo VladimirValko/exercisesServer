@@ -2,25 +2,17 @@ import CompletedModel from '../models/completedWorkout.js'
 
 export const createCompletedWorkout = async (req, res) => {
   try {
-
-    const oneExrecise = {
-      exerciseName: req.body.exerciseName,
-      goalSets: req.body.goalSets,
-      actualSets: req.body.actualSets,
-      goalReps: req.body.goalReps,
-      actualReps: req.body.actualReps,
-      weight: req.body.weight,
-      target: req.body.target,
-    };
+    
     const workout = new CompletedModel({
-         exercises: oneExrecise,
+            exercises: req.body.completedWorkout,
             user: req.body.user,
             workoutName: req.body.workoutName
     });
 
-    const completedExercise = await workout.save();
-    console.log(completedExercise, "это completedExercise креэйт");
-    res.json(completedExercise);
+    console.log(req.body)
+    const completWorkout = await workout.save();
+    console.log(completWorkout, "это completedExercise креэйт");
+    res.json(completWorkout);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -34,12 +26,12 @@ export const updateCompletedWorkout = async (req, res) => {
   
   
       const oneExrecise = {
-        exerciseName: req.body.exerciseName,
+        currentexerciseName: req.body.currentexerciseName,
         goalSets: req.body.goalSets,
         actualSets: req.body.actualSets,
         goalReps: req.body.goalReps,
         actualReps: req.body.actualReps,
-        goalWeight: req.body.weight,
+        goalWeight: req.body.goalWeight,
         actualWeight: req.body.actualWeight,
       };
   
